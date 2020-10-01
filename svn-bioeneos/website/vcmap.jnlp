@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+  spec="1.5+"
+  codebase="http://www.animalgenome.org/VCmap/"
+  href="vcmap.jnlp">
+  <information>
+    <title>VCMap</title>
+    <vendor>Bio::Neos, Inc.</vendor>
+    <homepage href="http://www.animalgenome.org/VCmap/"/>
+    <description>The Virtual Comparative Map (VCMap) Tool is an updated version of the VCMap tool created at the Medical College of Wisconsin (MCW) for performing comparative genomics research.</description>
+    <description kind="short">A tool for comparative genomics research.</description>
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.5+"/>
+    <jar href="vcmap.jar"/>
+    <jar href="lib/mysql-connector-java-5.1.6-bin.jar"/>
+    <jar href="lib/bn-error.jar"/>
+    <jar href="lib/bn-instance.jar"/>
+    <jar href="lib/log4j-1.2.16.jar"/>
+    <jar href="lib/sam-1.38.jar"/>
+    <jar href="lib/jh-2.0_05.jar"/>
+  </resources>
+  <application-desc main-class="bioneos.vcmap.VCMap"/>
+</jnlp> 

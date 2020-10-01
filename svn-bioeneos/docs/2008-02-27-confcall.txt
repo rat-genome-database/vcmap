@@ -1,0 +1,30 @@
+Wed 2/27/2008
+Conference Call
+VCMap Project
+---
+Jim Reecey (ISU)
+Anne Kwitek (UIowa)
+Mary ... (MCW)
+---
+- RGD could change gene position every week
+- RGD / ISU maps won't change often, but annotation will
+- Suggest that the VCMap frontend has its own data warehouse
+  - Pull data from ISU/MCW
+- Aligning the Maps - possible options out there
+  - Compara (Ensembl)
+  - UCSC orthologs
+  - NCBI orthologs
+  - In paranoid (not up to date often)
+  + Problem with them is they all use genomic maps, not RH
+  + 20-25% of the RH Maps (SSLPs) don't map back to Genomic coords
+- Start tool with two options, Ensembl or NCBI
+  - Chooses all data, sequence and annotation
+  - Don't try to map
+- Linkage maps?
+  - Don't hook up between the two
+  - Ex] Rat Linkage -> Rat Seq -> Human Seq -> Human Linkage
+- Store Map data for each elements
+  - RHMap: Name (RHMap), Map ID, positions
+  - Genomic Map: Assembly, positions
+- QTLs might have just primers... need manual mapping
++ Mary, Julienne will be getting a QTL dataset together for me

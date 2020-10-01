@@ -1,0 +1,20 @@
+What is all of the required functionality that we *must* retain?
+(Map loading, QTL loading, Zooming, Linking out, Draw marker links)
+(Launch from a webpage?)
+
+
+
+For maps that do not share any marker data, should we infer an approximate translation by comparing total map sizes?
+
+
+
+Are any Synteny relationships stored in Homologene?
+
+
+
+Were F/P/Bin markers generated manually in the original VCMap?
+
+
+
+List and decide on sources of data for all maps:
+(Genetic, Cytogenetic, Genome, RH, QTL)

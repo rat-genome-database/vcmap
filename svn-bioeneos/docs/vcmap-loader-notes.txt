@@ -1,0 +1,136 @@
+vcmap-server:
+
+main() - the entry point of the program first processes the JSON config file, 
+and then instantiates a new VCMapLoader and calls loadDb(). loadDB() is a 
+small method that just calls the other processing methods:
+
+processNCBI() - downloads and processes all files from the NCBI ftp site.  The 
+method processes the HomoloGene file first, storing HomoloGene names and IDs in
+HashMaps.  After this, the code iterates through each species named in the config
+file.  For each species, the relevant files are downloaded and decompressed.
+Before processing each file, an MD5 hash of the file is computed and compared to
+the hash value stored in the 'versions' table.  If the hashes are determined to 
+be equal, the file is up to date and the code moves on to the next file.  Otherwise,
+the file is then processed line by line, inserting any new data.  
+
+processRGD() - downloads and processes all files from RGD's ftp site.  After 
+downloading all files, this method calls processRGDIDs() (described below). The
+method then calls processRGDOntology(), and if successful, calls proccesRGDQTL().
+
+processRGDIDs() - a simple method used to "fix" the source_id associated with any
+Rat annotation in the DB.  Rat annotation is loaded from NCBI, but the users of
+the software would like all rat URLs to point to RGD's website, rather than NCBI's.
+To do this, a file (GENES_RAT) is downloaded from the ftp site; it contains two
+fields relevant to this purpose: an RGD internal identifier, and the Entrez Gene 
+identifier.  This method parses the file line by line, and substitutes the RGD
+ID for any matching Entrez IDs.
+
+processRGDOntology() - this method processes the QTLS_RAT file and inserts all
+ontology_node entries into the DB.
+
+processRGDQTL() - if processRGDOntology() was successful, this method executes
+and parses through QTLS_RAT a second time; this time, entries in the 'annotation'
+table are inserted.  
+
+processISU() - a simple method that checks the connection status and calls 
+processISUOntology() and processISUQTL().
+
+processISUOntology() - ISU's ontology hierarchy is three levels deep; it is:
+traitClass->traitType->traitName.  This method parses through the entries in 
+the ISU database and creates the appropriate ontology_node entries.
+
+processISUQTL() - this is a convoluted method that inserts annotation entries 
+for all ISU qtl data.  It is complicated by the fact that ISU's data is a bit
+lacking, and doesn't include gene names or gene IDs that match nicely to the 
+existing NCBI data.  To work around this, before processing the ISU data, a 
+list of all known gene names is constructed for each chromosome.  While parsing
+through the ISU data, every ISU entry's flank and peak markers are compared to 
+what is stored in the list of gene names.  If matches are found, the data is 
+valid and inserted into the VCMap db, otherwise the entry is discarded.  
+
+fixDuplicateHomologeneEntries() - after the load, some annotation ends with multiple
+HomoloGene references associated with it.  This method goes through and finds 
+these instances, determining which HomoloGene reference is the most common; all
+other HomoloGene references are discarded.
+
+clearMapFromDatabase() - after comparing a file's hash against the stored hash, if
+the existing map is determined to be out of date, this method is called to delete
+all database entries that are tied in any way to the map.
+
+downloadFile() - downloads the given file to the given directory using the given
+ftp connection.
+
+computeHash() - computes the MD5 hash for the given file.
+
+
+
+
+
+vcmap-client:
+
+Class: OntologyTree
+
+This is straight implementation of the ontology_tree table in the database. The
+only additional info that this class holds is an ArrayList of all OntologyNodes
+in the tree.  The tree is initially constructed via the Factory; nodes are added
+to it with the addNode() method.  In addition to the ArrayList of OntologyNodes,
+there is also a HashMap that maps ontology_node IDs to OntologyNode objects.
+
+The only non-trivial method in this class is traverseTree().  This is a recursive
+method that returns all of a given OntologyNode's descendants that are relevant
+to the selected ontology category.  This is called by the Factory's 
+getAnnotation() method. 
+
+
+Class: OntologyNode
+
+Basically, a straight implementation of the ontology_node table in the DB.  In 
+addition to the information stored in ontology_node rows, OntologyNode objects
+contain references to the annotation and chromosomes to which they are related.
+
+A potentially confusing subject is the 'isFilter' and 'filterChildren' variables;
+isFilter is a boolean that tells if--given the currently loaded chromosome--a
+given ontologyNode is relevant.  Similarly, filterChildren keeps track of which
+of an OntologyNode's children are 'filters' themselves.traitClass->traitType->traitName
+
+All methods and variables referring to annotationCount are used by AnnotationDialog
+to show the user how many pieces of annotation are associated with a given 
+ontology category.  It should be noted that this number is not static--it is 
+always in regards to the currently loaded species/chromosome, and currently
+selected ontology categories.
+
+
+Class: TreeBuilder
+
+A simple class that extends Thread.  It builds the OntologyTree in the 
+background.  
+
+The reason for conditionalYield() is that, previously, the thread would 
+continue to run even if the main window had closed.  This checks to make sure that
+the MainGUI is still visible before yielding; otherwise, the thread will stop
+execution.
+
+
+Class: ProgressPopup
+
+A straightforward encapsulation of a JProgressBar inside a JDialog.
+
+
+
+Class: Factory
+
+getURL() - queries the DB for the proper URL string and formats it, performing
+string substitution to fill the string with the proper parameters.
+
+getOntology() - this is the method that AnnotationDialog invokes to populate its
+list of ontology categories.  getOntology() instantiates a GetOntology object, 
+which is an inner class which is threaded; its run() method goes throught the 
+OntologyTree to determine which OntologyNodes are applicable to the loaded
+species/chromosome.  It can be called in two ways: with or without a "parent 
+node".  If called without a parent node, the method will determine all top-
+level ontology categories relevant to the currently loaded species/chromosome.
+If a parent node is provided, the method will determine all ontology categories
+that are direct children of the parent node. Any time that the ontology category
+selection in the AnnotationDialog changes, this method will be called again.
+
+

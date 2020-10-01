@@ -1,0 +1,15 @@
+NM_146477.1;mouse,17,35M;rat,20,0.8M;human,6,30M
+NM_008027.1;mouse,17,34M;rat,20,3.5M;human,6,30.7M
+NM_009995.1;mouse,17,32.5M;rat,20,4M;human,6,32M
+NM_013543.1;mouse,17,31M;rat,20,5M;human,6,33.6M
+NM_172617.1;mouse,17,24M;rat,20,5.5M;human,6,33.8M
+NM_007523.1;mouse,17,22M;-;-
+NM_134000.2;mouse,10,39.6M;-;-
+NM_172473.1;mouse,10,46M;rat,20,45M;-
+NM_010349.1;mouse,10,48M;rat,20,45.2M;human,6,114M
+NM_029083.1;mouse,10,59.3M;rat,20,27M;human,10,70M
+NM_207000.1;mouse,10,61.2M;rat,20,29.6M;human,10,70.4M
+NM_133672.1;mouse,10,63M;rat,20,30M;human,10,72M
+NM_178606.2;mouse,10,66M;rat,20,10.4M;human,21,43M
+NM_177794.2;mouse,10,68.4M;rat,20,13.6M;human,22,22.4M
+NM_172134.1;mouse,10,81M;-;-

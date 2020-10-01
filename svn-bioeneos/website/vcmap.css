@@ -1,0 +1,310 @@
+/* VCMap Page CSS Document */
+
+.description,
+.backhome,
+.question,
+.answer
+{
+  /*padding: 0 3em;*/
+  color: #666666;
+  /*text-align: center;*/
+  margin: 0 auto;
+}
+
+/* STYLES AFFECTING THE ENTIRE PAGE LAYOUT */
+html, body 
+{
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+body 
+{
+  background: #FFFFFF url("images/top_gradient.jpg") repeat-x;
+  font-family: Geneva, Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+#wrapper
+{
+  margin: 1px auto;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 1.75em ;
+  width: 720px;
+  border: 1px dotted #FFFFFF;
+}
+
+h1
+{
+  font-family: Helvetica Neue, Geneva, Arial, Helvetica, sans-serif ; 
+  font-weight: normal ;
+  color: #CCC ; 
+  font-size: 28pt ;
+  margin: 0 ;
+}
+
+h2
+{
+  font-family: Helvetica Neue ; 
+  font-weight: normal ;
+  color: #CCC ; 
+  font-size: 14pt ;
+  margin: 0 ;
+}
+
+/* Mods to create the look we want with typeface */
+h1.typeface-js
+{
+  margin-left: 15px ;
+  position: relative ;
+  top: 19px ;
+}
+
+h2.typeface-js
+{
+  position: relative ;
+  top: 25px ;
+}
+
+.line
+{
+  background: url('images/resources_line.gif') repeat-x bottom ; 
+  height: 3px ;
+}
+
+/* Links */
+a:link
+{
+  color: #111111;
+  text-decoration: none;
+  margin-bottom: 1px;
+}
+a:hover
+{
+  color: #043465;
+  border-bottom: 1px dotted;
+  margin-bottom: 0px;
+}
+a:active,
+a:visited
+{
+  color: #666666;
+  text-decoration: none;
+  margin-bottom: 1px;
+}
+a.none:hover
+{
+  border: 0;
+}
+a img
+{
+  border: 0;
+}
+
+/* ROLLOVER FOR JNLP LAUNCH */
+a#jnlp-link
+{
+  border-bottom: 0px;
+  outline: none ;
+}
+
+a#jnlp-link:active
+{
+  outline: none ;
+}
+
+a#jnlp-link:visited
+{
+  outline: none ;
+}
+
+a#jnlp-link:hover
+{
+  outline: none ;
+}
+
+a#jnlp-link img
+{
+  height: 83px;
+  width: 336px;
+  border: 0px;
+}
+a#jnlp-link img
+{
+  background: url("images/start_vcmap_v2.jpg") top left no-repeat;
+}
+
+a#jnlp-link:hover img
+{
+  background-position: 0 -85px;
+}
+
+a#jnlp-link:active img
+{
+  background-position: 0 -170px;
+}
+/* RESOURCES NAVIGATION */
+
+.nav
+{
+  text-align: right;
+  padding: 0 3em;
+}
+
+.nav ul
+{
+  list-style-type: none;
+}
+
+.nav ul li
+{
+  color: #959595;
+  background: url("images/arrow.jpg") no-repeat right;
+  padding: 0.2em 1.3em;
+}
+
+/* Back Home Link */
+
+.backhome
+{
+  margin-top: 50px;
+  text-align: center;
+  margin-bottom: 1.75em;
+}
+
+/* FAQ styling */
+
+.question a
+{
+  margin-top: 18px;
+  color: #666666;
+  border: none;
+}
+
+.answer
+{
+  color: #000000;
+  padding: 0 0.75em;       
+}
+
+.top
+{
+  font-size: .8em;
+  margin-left: 15px;
+}
+
+/* BOTTOM NAVIGATION */
+
+#bottomnav 
+{
+  font-family: Arial, Helvetica, sans-serif;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-top: 4px solid #E9E9E9;
+  padding-top: 0.1em;
+  height: 1.75em;
+  background-color: #ffffff;
+}
+
+#bottomnav ul
+{
+  padding-left: 0;
+  margin-left: 0;
+  background-color: #F0F0F0;
+  float: left;
+  width: 100%;
+  margin: 0;
+  border-left: 1px solid #FFFFFF;
+}
+
+#bottomnav li
+{
+  font-size: 0.9em;
+  float: left;
+  border-right: 2px solid #FFFFFF;
+  padding: .4em 0;
+  list-style-type: none;
+}
+
+#bottomnav span
+{
+  padding: 0.4em 1.4em;
+}
+
+#bottomnav a
+{
+  padding: .4em 0;
+  color: #043465;
+}
+
+#bottomnav a:visited
+{
+  color: #032354;
+}
+
+#bottomnav a:hover
+{
+  color: #F0F0F0;
+}
+
+#bottomnav li a:hover
+{
+  background-color: #043465;
+}
+
+/** Table related for the stats page **/
+table
+{
+  margin: 25px auto;
+  border: 1px solid #999999;
+  border-spacing: 0;
+}
+
+table td
+{
+  padding: 5px;
+}
+
+thead
+{
+  background-color: #cccccc;
+  font-style: italic;
+  font-size: .8em;
+  text-align: right;
+}
+
+thead tr.type
+{
+  background-color: #043465;
+  color: #fff;
+}
+
+thead tr.type td
+{
+  border-bottom: 1px solid #999;
+  border-top: 1px solid #bbb;
+}
+
+tbody td
+{
+  border-right: 1px dotted #ddd;
+}
+
+tbody tr.even
+{
+  background-color: #ddd;
+}
+
+tbody tr.totals
+{
+  font-weight: bold;
+}
+
+tbody tr.totals td
+{
+  border-top: 1px solid #bbb;
+}
